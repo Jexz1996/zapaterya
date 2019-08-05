@@ -1,0 +1,99 @@
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- breadcrumb-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                            <li aria-current="page" class="breadcrumb-item active">Productos</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <!--
+                    *** MENUS AND FILTERS ***
+                    _________________________________________________________
+                    -->
+                    <div class="card sidebar-menu mb-4">
+                        <div class="card-header">
+                            <h3 class="h4 card-title">Filtros</h3>
+                        </div>
+                        <div class="card-body">
+                            
+                                <ul class="nav nav-pills flex-column category-menu">
+                                    <li>
+                                     
+                                         <form action="/products" method="post" >
+                         <div class="mb-4">
+                            <h3 class="mb-3 h6 text-uppercase text-black d-block">Precio</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="min" class="form-control" placeholder="Mínimo"> </input>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="max" class="form-control" placeholder="Máximo"> </input>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="Buscar" class="btn btn-success col-12" />
+                    </form>
+                                    </li>
+
+                                   
+                                </ul>
+                            
+
+                        </div>
+                    </div>
+                    
+                  
+                    <!-- *** MENUS AND FILTERS END ***-->
+                    
+                </div>
+                <div class="col-lg-9">
+                   
+            
+                    <div class="row products">
+                          {{#each data }}
+                            <div class="col-lg-3 col-md-4">
+                                <div class="product">
+                                    <div class="flip-container">
+                                        <div class="flipper">
+                                            <div class="front"><a href="/information/{{id}}"><img src="{{ image }}" alt="" class="img-fluid"></a></div>
+
+                                        </div>
+                                    </div><a href="/information/{{id}}" class="invisible"><img src="{{ image }}" alt="" class="img-fluid"></a>
+                                    <div class="text">
+                                        <h3><a href="/information/{{id}}">{{ title}}</a></h3>
+                                        <p class="price">
+                                            <del></del>${{ price }}
+                                        </p>
+                                         {{#if stock }}
+                                        <form action="/addcarrito/{{ id }}" method="post">
+                                         <p class="buttons"><input  type="submit" value="COMPRAR" class="btn btn-primary"/></p>
+                                        </form>
+                                    {{else }}
+                                       <p class="buttons"><a class="btn btn-danger" style="color:white">AGOTADO</a></p>
+                                    {{/if }}  
+                                      
+                                    </div>
+                                    <!-- /.text-->
+                                </div>
+                                <!-- /.product            -->
+                            </div>
+                        {{/each}}
+
+                        <!-- /.products-->
+                    </div>
+                    
+                </div>
+                <!-- /.col-lg-9-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

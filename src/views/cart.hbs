@@ -1,0 +1,172 @@
+ <div id="all">
+      <div id="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- breadcrumb-->
+               {{#if data }}
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                  <li aria-current="page" class="breadcrumb-item active">Carrito de compras</li>
+                </ol>
+              </nav>
+            </div>
+            <div id="basket" class="col-lg-9">
+              <div class="box">
+               
+                  <h1>Carrito de compras</h1>
+                  <div class="table-responsive">
+                    <table class="table" id="miTabla">
+                      <thead>
+                        <tr>
+                          <th colspan="2">Producto</th>
+                          <th>Cantidad</th>
+                          <th>Precio</th>
+                          <th colspan="2">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each data}}
+                        <tr>
+                          <td><a><img src="{{ image }}" alt="Black Blouse Armani"></a></td>
+                          <td><a >{{ title }}</a></td>
+                          <td>
+                            <input type="number" id="c_{{id}}" value="1" class="form-control">
+                          </td>
+                          <td style="display: none">{{price}}</td>
+                          <td>${{price}}</td>
+                          <td>$2</td>
+                          <td style="display: none">{{id}}</td>
+                          <td><a href="/deletec/{{id}}"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th colspan="5">Subotal</th>
+                          <th colspan="2" id="res">$00.00</th>
+                          
+                        </tr>
+                        <tr>
+                          <th colspan="5">Envio</th>
+                          <th colspan="2" id="">$300.00</th>
+                          
+                        </tr>
+                        <tr>
+                          <th colspan="5">Total</th>
+                          <th colspan="2" id="rest"></th>
+                          
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                  <!-- /.table-responsive-->
+                  <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                    <div class="left"><a href="/products" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>Continuar Comprando</a></div>
+                    <div class="right">
+                      <button class="btn btn-outline-secondary" onclick="calcular()"><i class="fa fa-refresh" ></i>Actualizar</button>
+                      
+                    </div>
+                    <div class="right">
+<form action="/pay" method="post">
+                        <input style="display: none" id="total" name="total" value="" >
+                        <input style="display: none" name="user" value="{{user.id}} ">
+                       <button type="submit" class="btn btn-primary">Pasar a pagar <i class="fa fa-chevron-right"></i></button>
+                      </form>
+                    </div>
+                  </div>
+               
+              </div>
+              </div>
+
+{{ else }}
+                <div class="jumbotron">
+        <h1 class="display-4 text-center">Aun no se han agregado productos al carrito!</h1>
+       
+        
+        <div class="lead text-center">
+             <a class="buy-now btn btn-sm btn-primary" href="/products">COMPRAR</a>
+              | <a class="buy-now btn btn-sm btn-primary" href="/">REGRESAR AL INICIO</a>
+        </div>
+    </div>
+</div>
+  {{/if }} 
+              </div>
+
+
+
+
+
+
+    <script>
+
+     
+		window.onload=function() {
+
+			calcular();
+
+		}
+
+    function calcular() {
+
+    // obtenemos todas las filas del tbody
+
+    var filas=document.querySelectorAll("#miTabla tbody tr");
+
+ 
+
+    var total=0;
+
+ 
+
+    // recorremos cada una de las filas
+
+    filas.forEach(function(e) {
+
+ 
+
+        // obtenemos las columnas de cada fila
+
+        var columnas=e.querySelectorAll("td");
+
+ 
+
+        // obtenemos los valores de la cantidad y importe
+
+        var cantidad=parseFloat(columnas[6].textContent);
+       
+        var number1= $("#c_"+cantidad).val();
+
+ 
+       
+
+        var importe=columnas[3].textContent;
+ 
+ 
+
+        // mostramos el total por fila
+
+        columnas[5].textContent=(number1*importe).toFixed(2);
+
+ 
+
+        total+=number1*importe;
+
+    });
+
+    document.getElementById("res").innerHTML ="$" + (total).toFixed(2);
+    document.getElementById("rest").innerHTML ="$" + (total + 300).toFixed(2);
+    document.getElementById("total").value = total + 300;
+
+    // mostramos la suma total
+
+   
+
+}
+
+
+
+
+
+    </script>

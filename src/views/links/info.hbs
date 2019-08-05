@@ -1,0 +1,44 @@
+<div class="container">
+    <h2>Compras que se han realizado en la pagina</h2>
+    <p>
+       
+    </p>
+    <table class="table">
+        <tr>
+            <th lass="text-center">
+                Usuario
+            </th>
+            <th lass="text-center">
+                Fecha
+            </th>
+            <th lass="text-center">
+                Total de productos
+            </th>
+            <th lass="text-center">
+                Total
+            </th>
+            <th class="text-center">Acciones</th>
+        </tr>
+        {{#each data}}
+            <tr>
+                <td lass="text-center mt-5">
+                    {{ username }}
+                </td>
+                <td class="text-center"> 
+                    {{ fecha }}
+                </td>
+                <td class="text-center">
+                    {{ p }}
+                </td>
+                <td class="text-center">
+                    {{ total }}
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-info" href="/links/compra/{{ user }}" >Ver productos</a> 
+                  
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+  
+</div>

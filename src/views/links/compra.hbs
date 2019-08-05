@@ -1,0 +1,43 @@
+<div class="bg-light py-3">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-0"> <a href="/links/info">Compras en la pagina</a><span class="mx-2 mb-0">/</span> <strong class="text-black">Lista de la compra</strong></div>
+    </div>
+    </div>
+</div>  
+<br>
+<div class="container">
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              <table class="table table-bordered" id="miTabla">
+                <thead>
+                  <tr>
+                    <th class="product-thumbnail">Imagen</th>
+                    <th class="product-name">Producto</th>
+                    <th class="product-price">Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                  <tr>
+                    <td class="product-thumbnail">
+                      <img src="{{ image }}" alt="Image" width="100px" height="100px" >
+                    </td>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{ title }}</h2>
+                    </td>
+                    <td style="display: none">{{ price }}</td>
+                    <td id="price{{ id }}">${{ price }}</td>
+                  
+                    
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+
+       
+        </div>

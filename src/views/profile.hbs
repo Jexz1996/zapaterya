@@ -1,0 +1,82 @@
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<style>
+   
+    /* Media query for mobile viewport */
+    @media screen and (max-width: 400px) {
+        #paypal-button-container {
+           width: 100%;
+        }
+    }
+   
+    /* Media query for desktop viewport */
+    @media screen and (min-width: 400px) {
+        #paypal-button-container {
+           width: 250px;
+            display: inline-block;
+        }
+    }
+   
+</style>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4 text-center">¡Tu compra esta casi lista!</h1>
+        <p class="lead text-center">Estas a punto de pagar con paypal la cantidad de:</p>
+        <P class="lead text-center"><strong>{{ total }}</strong></P>
+        <div class="lead text-center">
+             <div id="paypal-button-container"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    paypal.Button.render({
+        env: 'sandbox', // sandbox | production
+        style: {
+            label: 'checkout',  // checkout | credit | pay | buynow | generic
+            size:  'responsive', // small | medium | large | responsive
+            shape: 'pill',   // pill | rect
+            color: 'gold'   // gold | blue | silver | black
+        },
+ 
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+ 
+        client: {
+            sandbox: 'AXt-sse92slpJ99M_SkJXlffSnwmF0w6klAfgdRESJEI3sG-xBbpqS3TMWEAtiusBccMyywdDAxjljGt',
+            production: ''
+        },
+ 
+        // Wait for the PayPal button to be clicked
+
+        
+ 
+        payment: function(data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: '{{ ts }}' , currency: 'MXN' },
+                            description:"Compra de productos a Zapatería del Sur: {{ total }}" ,
+                            custom:"Codigo"
+                        }
+                    ]
+                }
+            });
+        },
+ 
+        // Wait for the payment to be authorized by the customer
+ 
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                console.log(data);
+                console.log({{ user.id }})
+                window.location="http://localhost:4000/tanks/{{ user.id }}" // <------- aqui 
+                
+            });
+        }
+   
+    }, '#paypal-button-container');
+ 
+</script>
+

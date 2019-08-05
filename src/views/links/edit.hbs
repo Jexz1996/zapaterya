@@ -1,0 +1,70 @@
+<div class="bg-light py-3">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-0"> <a href="/index2">Administración</a><span class="mx-2 mb-0">/</span> <strong class="text-black">Editar Zapato</strong></div>
+    </div>
+    </div>
+</div>  
+<br />
+<div class="form-horizontal">
+    <form action="/links/edit/{{ data.id }}" method="post"  enctype="multipart/form-data">
+            <input type="hidden" name="imagenurl" value="{{ data.image }}">
+            <input type="hidden" name="id" value="{{ data.id }}">
+            <div class="container">
+            <h2 class="text-black">Editar Zapato</h2>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="col-md-12">
+                            <label class="text-black text-center">Nombre del Zapato</label>
+                            <input type="text" class="form-control" name="title" value="{{ data.title }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="text-black text-center">Precio</label>
+                            <input type="text" class="form-control" name="price" value="{{ data.price }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="text-black text-center">Stock</label>
+                            <input type="text" class="form-control" name="stock" value="{{ data.stock }}">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="text-black text-center">Descripción</label>
+                            <textarea type="text" class="form-control" name="description">{{ data.description }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-12">
+                            <img id="imagePreview" class="border rounded" style="width:100%;height:240px " src="{{ data.image }}"/>
+                            <br />
+                            <br/>
+                            <input type="file" name="image" id="image">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-12">
+                        <input type="submit" value="Guardar" class="btn btn-success col-12" />
+                    </div>
+                </div>
+        </div>
+    </form>
+    
+</div>
+    <br />
+
+    <script>
+        function mostrarImagen(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function (e) {
+                   $('#imagePreview').attr('src', e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+   
+       $("#image").change(function () {
+           mostrarImagen(this);
+       });
+   
+   </script>

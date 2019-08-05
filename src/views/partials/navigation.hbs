@@ -1,0 +1,51 @@
+ <header class="header mb-5">
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="index.html" class="navbar-brand home"><img src="" alt="Zapateria del Sur" class="d-none d-md-inline-block"><img src="img/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Zapateria del Sur</span></a>
+                <div class="navbar-buttons">
+                    <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
+                    <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-user"></i></button>
+                </div>
+                <div id="navigation" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item "><a class="nav-link {{ index }}" href="/">Inicio</a></li>
+                        <li class="nav-item "><a class="nav-link {{ products }}" href="/products" >Productos</a></li>
+                        <li class="nav-item"><a href="/cart" class="nav-link {{ car }}">Carrito de Compras</a></li>
+                        {{#if user}}
+                          {{#if user.rol}}
+                            <li class="nav-item"><a href="/links/list" class="nav-link {{ adminyuc }}">Administración</a></li>
+                            <li class="nav-item"><a href="/links/info" class="nav-link {{ adminyuc }}">Compras en la pagina</a></li>
+                          {{else}}
+                         
+                           
+                          {{/if}}
+                        
+
+                        {{/if}}
+                        
+                         
+                       
+                    </ul>
+                   
+                    <div class="navbar-buttons d-flex justify-content-end">
+              <!-- /.nav-collapse-->
+              {{#if user}}
+                            
+                             <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="/logout" class="btn btn-primary navbar-btn"><i class="fa fa-user"></i><span>{{user.username}}</span></a></div>
+                        {{else}}
+                        <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="/signin" class="btn btn-primary navbar-btn"><i class="fa fa-user"></i><span></span></a></div>
+                   
+
+                        {{/if}}
+             
+              
+              <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="/cart" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>{{ carrito }} Producto(s)</span></a></div>
+            </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
